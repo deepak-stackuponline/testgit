@@ -14,3 +14,7 @@ for(i=0; i<colors.length;i++){
     
 }
 console.log(count);
+
+let index = colors.indexOf("red");
+colors.splice(index, 0);
+console.log(colors);
