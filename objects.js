@@ -23,14 +23,14 @@ let sachinobject = {
 //BRACKET Notatiom
 
 //console.log(sachinobject["firstName"]);
-//console.log(sachinobject["friends"]);
+console.log(sachinobject["friends"][0]);
 
 let nameKey = "Name";
-console.log(sachinobject["first" + nameKey]);
-console.log(sachinobject["last" + nameKey]);
+//console.log(sachinobject["first" + nameKey]);
+//console.log(sachinobject["last" + nameKey]);
 
 sachinobject.nationality = "Indian";
-console.log(sachinobject);
+//console.log(sachinobject);
 
 sachinobject["battingStyle"] = "Right Handed";
-console.log(sachinobject);
+//console.log(sachinobject);
