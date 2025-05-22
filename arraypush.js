@@ -10,3 +10,6 @@ console.log(fruits);
 
 fruits.shift();
 console.log(fruits);
+
+console.log(fruits.indexOf("mango"));
+console.log(fruits.includes("mango"));

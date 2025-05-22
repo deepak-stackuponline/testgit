@@ -1,4 +1,4 @@
-let day = 20;
+let day = 8;
 let name1;
 
 

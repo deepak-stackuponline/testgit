@@ -54,7 +54,7 @@ let checkEveryArrayMethodWithExample = personArray.every((singlePerson,index)=>{
 //console.log(checkEveryArrayMethodWithExample);
 
 //Includes array
-const fruitsArray = ['Apple', 'Banana', 'Orange'];
+const fruitsArray = ['Apple',  'Banana', 'Orange'];
 //console.log(fruitsArray.includes('Apple'));
 
 //IndexOf Array
