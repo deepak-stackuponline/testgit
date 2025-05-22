@@ -42,9 +42,26 @@
     </div>
     
     <script>
-        let container = document.getElementById("container");
-        let msg = container.querySelectorAll(".message");
+        let msg1 = document.querySelectorAll("h1");
+        console.log(msg1)
+
+        let msg2 = document.querySelectorAll("div h1");
+        console.log(msg2);
+
+        let msg3 = document.querySelectorAll("div,h1");
+        console.log(msg3);
+
+
+
+        let msg = document.querySelectorAll("#container");
+        console.log(msg);
+
+
+        //let container = document.getElementById("container");
+        //let msg = container.querySelectorAll(".message");
+
         //For selecting class . is used for selecting id # is used
+
        // let msg = document.querySelector(".message");
       // let msg = document.querySelectorAll(".message");
         console.log(msg);

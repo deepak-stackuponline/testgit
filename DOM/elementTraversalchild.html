@@ -1,0 +1,50 @@
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Child Element</title>
+</head>
+<body>
+    <div    class="heading"><p> Welcome to the World 1</p>
+        <p> Welcome to the World 2</p>
+        <p> Welcome to the World 3</p>
+        <p> Welcome to the World 4</p>
+        <p> Welcome to the World 5</p>
+
+
+
+    </div>
+    <script>
+            let parent = document.querySelector(".heading");
+            console.log(parent.firstChild);
+    </script>
+</body>
+</html>
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Child Element</title>
+</head>
+<body>
+    <div    class="heading">
+        <p> Welcome to the World 1</p>
+        <p> Welcome to the World 2</p>
+        <p> Welcome to the World 3</p>
+        <p> Welcome to the World 4</p>
+        <p> Welcome to the World 5</p>
+    </div>
+    <script>
+            let parent = document.querySelector(".heading");
+            //console.log(parent.firstElementChild);
+            //console.log(parent.lastElementChild);
+            //console.log(parent.lastChild);
+            console.log(parent.childNodes);          
+    </script>
+</body>
+</html>
