@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>textContent</title>
+</head>
+<body>
+    <ul id="menu">
+        <li>HOME</li>
+        <li>ABOUT US</li>
+        <li>BLOG</li>
+        <li>PROJECT</li>
+        <li style="display: none;">Hello Addition</li>
+    </ul>
+
+    <script>
+        let menu = document.getElementById("menu");
+        console.log(menu.textContent); //will display all the contents in console also it will consider all the tag as text
+        //console.log(menu.innerText); //will only display the contens except dispkay none in console
+   
+        menu.textContent = "Helloooooo"
+   </script>
+</body>
+</html>
