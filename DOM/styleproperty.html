@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="username" placeholder="username" style="background-color: red; font-size: 25px;;"/>
+
+    <script>
+        let inputBox = document.getElementById("username");
+        //console.log(inputBox.style);
+        inputBox.style.padding = "50px";
+        inputBox.style.margin = "100px";
+        console.log(inputBox.style.backgroundColor);
+        console.log(inputBox.style.fontSize);
+
+        //inputBox.style.cssText = "width:500px";
+        //cssText will override already included styles
+
+        inputBox.style.cssText += "width:50px";
+        //adding an assignment operator will help to override the issue
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     <ul id="menu">
+        <li>HOME</li>
+        <li>ABOUT US</li>
+        <li>BLOG</li>
+        <li>PROJECT</li>
+    </ul>
+<script>
+    let menu = document.getElementById("menu");
+
+    menu.insertAdjacentHTML("beforebegin","<h1>Welcome Buddy</h1>");
+
+    
+    menu.insertAdjacentHTML("afterbegin", "<li>CONTACT US</li>");
+
+
+    menu.insertAdjacentHTML("beforeend","<li>Last One</li>");
+
+    menu.insertAdjacentHTML("afterend","<h1>After End Sibiling</h1>");
+</script>
+</body>
+</html>

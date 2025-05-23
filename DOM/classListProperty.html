@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="title" class="main message">Welcome to Javascript</h1>
+    <script>
+        let title = document.getElementById("title");
+        title.classList.add("new", "new1");
+        title.classList.remove("new", "new1");
+        title.classList.toggle("new3");
+        //in toggle if the class name is already there it will be removed if the classname is not present it will append
+        console.log(title.classList.contains("main"));
+        //contains returns whether the class is present or not present
+        console.log(title);
+    </script>
+</body>
+</html>
