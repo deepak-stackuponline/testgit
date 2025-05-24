@@ -3,12 +3,12 @@
 //SYNCHRONOUS CALL BACK
 
 function greet(name){//Call Back Function
-    console.log(`Hello,${name}`);
+    console.log(`Hello ${name}`);
 }
 
 function processName(callback){
     const name = "Deepak";
-    callback(NavigationPreloadManager);
+    callback(name);
     console.log("Processing Completed");
 }
 
