@@ -1,10 +1,7 @@
-task1().then(value =>{console.log(value);return task2() })
-//         .catch(error=>{console.error(error);return Promise.resolve()})
-//         .then(value =>{console.log(value);return task3()})
-//         .catch(error=>{console.error(error);return Promise.resolve()})
-//         .then(value =>{console.log(value);return task4()})
-//         .catch(error=>{console.error(error);return Promise.resolve()})
-//         .then(value=>{console.log(value);return task5()})
-//         .catch(error=>{console.error(error);return Promise.resolve()})
-//         .then(value=>{console.log(value);})
-//         .catch(error=>{console.error(error)});
+//class is a template before creating an object
+
+var student1 = {
+    name: "Alen",
+    yob: 1997,
+    age: getAge(),
+    getAge: function
