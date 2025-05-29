@@ -59,7 +59,9 @@ async function runTasks() {
   }
 
   try {
-    const res3 = await task3();
+    const res3 = await task3().then((val)=>{
+        console.log(val)
+    });
     console.log(res3);
   } catch (err) {
     console.error(err);

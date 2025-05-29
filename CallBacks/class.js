@@ -18,6 +18,6 @@ var student2 = new Student("Deepak",1980);
 var student3 = new Student("Jose",1980);
 
 
-console.log(student1);
+console.log(student1.getAge());
 console.log(student2);
 console.log(student3);
