@@ -1,1 +1,10 @@
-NavigationPreloadManager
+task1().then(value =>{console.log(value);return task2() })
+//         .catch(error=>{console.error(error);return Promise.resolve()})
+//         .then(value =>{console.log(value);return task3()})
+//         .catch(error=>{console.error(error);return Promise.resolve()})
+//         .then(value =>{console.log(value);return task4()})
+//         .catch(error=>{console.error(error);return Promise.resolve()})
+//         .then(value=>{console.log(value);return task5()})
+//         .catch(error=>{console.error(error);return Promise.resolve()})
+//         .then(value=>{console.log(value);})
+//         .catch(error=>{console.error(error)});

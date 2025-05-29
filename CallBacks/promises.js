@@ -1,6 +1,7 @@
 //In asynchronous programs to avoid call back hell JS introduces promises
 //A promise is an object representing the eventual completion or failure of an asynchronouse operation
 //An object representing eventual completion or failure
+//Promise have one more status pending others are accepted and rejected
 
 let myPromise = new Promise(function(resolve,reject){
     let sucess = true;
