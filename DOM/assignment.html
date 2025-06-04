@@ -4,25 +4,120 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+    ul {
+      list-style-type: none;
+      padding-left: 20px;
+    }
+    li {
+      margin: 5px 0;
+    }
+  </style>
 </head>
 <body>
-    
+    <div id="menu-container"></div>
 </body>
-<script>
-     const menuData = {
-    title: "Main Menu",
-    submenus: [
-      { title: "Submenu 1" },
+<!-- <script>
+  const menuData = {
+    menuName: "Main Menu",
+    child: [
       {
-        title: "Submenu 2",
-        submenus: [
-          { title: "Submenu 21" },
-          { title: "Submenu 22" }
+        menuName: "Submenu 1",
+        child: []
+      },
+      {
+        menuName: "Submenu 2",
+        child: [
+          {
+            menuName: "Submenu 21",
+            child: []
+          },
+          {
+            menuName: "Submenu 22",
+            child: []
+          }
         ]
       }
     ]
   };
+
+  function createMenu(menu) {
+    const ul = document.createElement("ul");
+    const li = document.createElement("li");
+    li.textContent = menu.menuName;
+    ul.appendChild(li);
+
+    if (menu.child && menu.child.length > 0) {
+      const childUl = document.createElement("ul");
+      menu.child.forEach(childItem => {
+        childUl.appendChild(createMenu(childItem));
+      });
+      li.appendChild(childUl);
+    }
+
+    return ul;
+  }
+
+  const container = document.getElementById("menu-container");
+  container.appendChild(createMenu(menuData));
+</script> -->
+
+<script>
+  const menuData = {
+    menuName: "Main Menu",
+    child: [
+      {
+        menuName: "Submenu 1",
+        child: []
+      },
+      {
+        menuName: "Submenu 2",
+        child: [
+          {
+            menuName: "Submenu 21",
+            child: []
+          },
+          {
+            menuName: "Submenu 22",
+            child: []
+          }
+        ]
+      }
+    ]
+  };
+
+  function createMenuNonRecursive(data) {
+    const container = document.createElement("ul");
+
+    // Stack holds items in the form { dataNode, parentElement }
+    const stack = [{ dataNode: data, parentElement: container }];
+
+    while (stack.length > 0) {
+      const { dataNode, parentElement } = stack.pop();
+
+      const li = document.createElement("li");
+      li.textContent = dataNode.menuName;
+      parentElement.appendChild(li);
+
+      if (dataNode.child && dataNode.child.length > 0) {
+        const ul = document.createElement("ul");
+        li.appendChild(ul);
+
+        // Push children in reverse order so they appear in correct order
+        for (let i = dataNode.child.length - 1; i >= 0; i--) {
+          stack.push({ dataNode: dataNode.child[i], parentElement: ul });
+        }
+      }
+    }
+
+    return container;
+  }
+
+  const menuContainer = document.getElementById("menu-container");
+  menuContainer.appendChild(createMenuNonRecursive(menuData));
 </script>
+
+
 </html>
 
 <!-- JavaScript has a built in function for converting JSON strings into JavaScript objects:
