@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Menu Structure (Non-Recursive)</title>
+  <style>
+    ul {
+      list-style-type: none;
+      padding-left: 20px;
+    }
+    li {
+      margin: 5px 0;
+    }
+    .menu-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="menuContainer"></div>
+
+<script>
+  // JSON data
+  const menuData = {
+    title: "Main Menu",
+    submenus: [
+      { title: "Submenu 1" },
+      {
+        title: "Submenu 2",
+        submenus: [
+          { title: "Submenu 21" },
+          { title: "Submenu 22" }
+        ]
+      }
+    ]
+  };
+
+  function createMenu(data) {
+    const container = document.createElement("div");
+
+    // Create the title
+    if (data.title) {
+      const titleDiv = document.createElement("div");
+      titleDiv.className = "menu-title";
+      titleDiv.textContent = data.title;
+      container.appendChild(titleDiv);
+    }
+
+    // Create the root <ul>
+    const rootUl = document.createElement("ul");
+    container.appendChild(rootUl);
+
+    // Use a queue for iterative processing of nested submenus
+    const queue = [];
+
+    // Push initial items to the queue
+    data.submenus.forEach(item => {
+      queue.push({ data: item, parentUl: rootUl });
+    });
+
+    // Process the queue
+    while (queue.length > 0) {
+      const { data: item, parentUl } = queue.shift();
+
+      // Create <li> for the current item
+      const li = document.createElement("li");
+      li.textContent = item.title;
+      parentUl.appendChild(li);
+
+      // If item has submenus, create a <ul> under this <li>
+      if (item.submenus && item.submenus.length > 0) {
+        const childUl = document.createElement("ul");
+        li.appendChild(childUl);
+
+        // Add each submenu to the queue for processing
+        item.submenus.forEach(subItem => {
+          queue.push({ data: subItem, parentUl: childUl });
+        });
+      }
+    }
+
+    return container;
+  }
+
+  // Render the menu
+  const menuContainer = document.getElementById("menuContainer");
+  const menu = createMenu(menuData);
+  menuContainer.appendChild(menu);
+</script>
+
+</body>
+</html>
