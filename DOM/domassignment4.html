@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Simple Menu</title>
+  <style>
+    ul {
+      list-style-type: none;
+      padding-left: 20px;
+    }
+    li {
+      margin: 5px 0;
+    }
+    .menu-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Container where the menu will be shown -->
+<div id="menuContainer"></div>
+
+<script>
+  // Sample menu data in JSON format
+  const menuData = {
+    title: "Main Menu",
+    submenus: [
+      { title: "Submenu 1" },
+      {
+        title: "Submenu 2",
+        submenus: [
+          { title: "Submenu 21" },
+          { title: "Submenu 22" }
+        ]
+      }
+    ]
+  };
+
+  // Function to create a menu from given data
+  function createMenu(menu) {
+    // Create a container div
+    const container = document.createElement("div");
+
+    // Add main title if available
+    if (menu.title) {
+      const titleDiv = document.createElement("div");
+      titleDiv.className = "menu-title";
+      titleDiv.textContent = menu.title;
+      container.appendChild(titleDiv);
+    }
+
+    // If there are submenus, create a list
+    if (menu.submenus && menu.submenus.length > 0) {
+      const ul = document.createElement("ul");
+
+      menu.submenus.forEach(submenu => {
+        const li = document.createElement("li");
+        li.textContent = submenu.title;
+
+        // If this submenu has its own submenus, call createMenu again
+        if (submenu.submenus) {
+          const childMenu = createMenu(submenu);
+          li.appendChild(childMenu);
+        }
+
+        ul.appendChild(li);
+      });
+
+      container.appendChild(ul);
+    }
+
+    return container;
+  }
+
+  // Get the menu container from the HTML
+  const menuContainer = document.getElementById("menuContainer");
+
+  // Build the menu and add it to the page
+  const menuElement = createMenu(menuData);
+  menuContainer.appendChild(menuElement);
+</script>
+
+</body>
+</html>

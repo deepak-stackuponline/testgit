@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Simple Menu</title>
+  <style>
+    ul { list-style-type: none; padding-left: 20px; }
+    li { margin: 5px 0; }
+    .menu-title { font-weight: bold; margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+
+<div id="menuContainer"></div>
+
+<script>
+  const menuData = {
+    title: "Main Menu",
+    submenus: [
+      { title: "Submenu 1" },
+      {
+        title: "Submenu 2",
+        submenus: [
+          { title: "Submenu 21" },
+          { title: "Submenu 22" }
+        ]
+      }
+    ]
+  };
+
+  function buildMenu({ title, submenus = [] }) {
+    const container = document.createElement("div");
+    if (title) {
+      const titleDiv = document.createElement("div");
+      titleDiv.className = "menu-title";
+      titleDiv.textContent = title;
+      container.appendChild(titleDiv);
+    }
+
+    if (submenus.length > 0) {
+      const ul = document.createElement("ul");
+      submenus.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = item.title;
+
+        // Recursively append submenus (if any)
+        if (item.submenus) {
+          li.appendChild(buildMenu(item));
+        }
+
+        ul.appendChild(li);
+      });
+      container.appendChild(ul);
+    }
+
+    return container;
+  }
+
+  document.getElementById("menuContainer").appendChild(buildMenu(menuData));
+</script>
+
+</body>
+</html>
