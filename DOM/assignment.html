@@ -86,7 +86,7 @@
     ]
   };
 
-  function createMenuNonRecursive(data) {
+  function createMenu(data) {
     const container = document.createElement("ul");
 
     // Stack holds items in the form { dataNode, parentElement }
@@ -114,7 +114,7 @@
   }
 
   const menuContainer = document.getElementById("menu-container");
-  menuContainer.appendChild(createMenuNonRecursive(menuData));
+  menuContainer.appendChild(createMenu(menuData));
 </script>
 
 
