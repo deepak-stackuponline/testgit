@@ -1,0 +1,29 @@
+function createMenuNonRecursive(data) {
+    const container = document.createElement("ul");
+
+    // Stack holds items in the form { dataNode, parentElement }
+    const stack = [{ dataNode: data, parentElement: container }];
+
+    while (stack.length > 0) {
+      const { dataNode, parentElement } = stack.pop();
+
+      const li = document.createElement("li");
+      li.textContent = dataNode.menuName;
+      parentElement.appendChild(li);
+
+      if (dataNode.child && dataNode.child.length > 0) {
+        const ul = document.createElement("ul");
+        li.appendChild(ul);
+
+        // Push children in reverse order so they appear in correct order
+        for (let i = dataNode.child.length - 1; i >= 0; i--) {
+          stack.push({ dataNode: dataNode.child[i], parentElement: ul });
+        }
+      }
+    }
+
+    return container;
+  }
+
+  const menuContainer = document.getElementById("menu-container");
+  menuContainer.appendChild(createMenuNonRecursive(menuData));

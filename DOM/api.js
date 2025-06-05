@@ -7,7 +7,7 @@ fetch('https://mocki.io/v1/84f1aa92-af66-4453-9ce6-b9c5668ef03e')
       : (data.id === 1 ? data : null);
 
     if (result) {
-      console.log(result);  // Print the full object with id == 1
+      console.log(result);  // Print the full object with 
     } else {
       console.log("No item with id found.");
     }

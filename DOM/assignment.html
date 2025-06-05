@@ -16,9 +16,24 @@
 </head>
 <body>
     <div id="menu-container"></div>
+    <!-- <ul>
+      <li>Main Menu</li>
+      <li>
+        <ul>
+          <li>Submenu 1</li>
+          <li>Submenu 2</li>
+          <li>
+            <ul>
+              <li>Submenu 21</li>
+              <li>Submenu 22</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul> -->
 </body>
-<!-- <script>
-  const menuData = {
+<script>
+  const menuObject = {
     menuName: "Main Menu",
     child: [
       {
@@ -27,94 +42,80 @@
       },
       {
         menuName: "Submenu 2",
+        child: []
+      },
+      {
+        menuName: "Submenu 3",
         child: [
           {
-            menuName: "Submenu 21",
-            child: []
+            menuName: "Submenu 31",
+            child: [{
+                menuName: "Submenu 311",
+                child: []
+              },]
           },
           {
-            menuName: "Submenu 22",
+            menuName: "Submenu 32",
+            child: []
+          }
+        ]
+      },
+      {
+        menuName: "Submenu 3",
+        child: [
+          {
+            menuName: "Submenu 31",
+            child: [{
+                menuName: "Submenu 311",
+                child: []
+              },]
+          },
+          {
+            menuName: "Submenu 32",
             child: []
           }
         ]
       }
     ]
   };
-
-  function createMenu(menu) {
-    const ul = document.createElement("ul");
-    const li = document.createElement("li");
-    li.textContent = menu.menuName;
-    ul.appendChild(li);
-
-    if (menu.child && menu.child.length > 0) {
-      const childUl = document.createElement("ul");
-      menu.child.forEach(childItem => {
-        childUl.appendChild(createMenu(childItem));
-      });
-      li.appendChild(childUl);
-    }
-
-    return ul;
-  }
 
   const container = document.getElementById("menu-container");
-  container.appendChild(createMenu(menuData));
-</script> -->
 
-<script>
-  const menuData = {
-    menuName: "Main Menu",
-    child: [
-      {
-        menuName: "Submenu 1",
-        child: []
-      },
-      {
-        menuName: "Submenu 2",
-        child: [
-          {
-            menuName: "Submenu 21",
-            child: []
-          },
-          {
-            menuName: "Submenu 22",
-            child: []
+    function createMenu(menuValue) {
+      const rootUl = document.createElement("ul");
+      const stack = [];
+
+      
+      stack.push({ data: menuValue, parentElement: rootUl });
+
+      while (stack.length > 0) {
+        const { data, parentElement } = stack.pop();
+
+        
+        const li = document.createElement("li");
+        li.textContent = data.menuName;
+        parentElement.appendChild(li);
+
+        //Child Management
+        if (data.child && data.child.length > 0) {
+          const childUl = document.createElement("ul");
+          li.appendChild(childUl);
+
+          // Reverse pusch
+          for (let i = data.child.length - 1; i >= 0; i--) {
+            stack.push({ data: data.child[i], parentElement: childUl });
+
           }
-        ]
-      }
-    ]
-  };
-
-  function createMenuNonRecursive(data) {
-    const container = document.createElement("ul");
-
-    // Stack holds items in the form { dataNode, parentElement }
-    const stack = [{ dataNode: data, parentElement: container }];
-
-    while (stack.length > 0) {
-      const { dataNode, parentElement } = stack.pop();
-
-      const li = document.createElement("li");
-      li.textContent = dataNode.menuName;
-      parentElement.appendChild(li);
-
-      if (dataNode.child && dataNode.child.length > 0) {
-        const ul = document.createElement("ul");
-        li.appendChild(ul);
-
-        // Push children in reverse order so they appear in correct order
-        for (let i = dataNode.child.length - 1; i >= 0; i--) {
-          stack.push({ dataNode: dataNode.child[i], parentElement: ul });
         }
       }
+
+      return rootUl;
     }
 
-    return container;
-  }
+    const menuTree = createMenu(menuObject);
+    container.appendChild(menuTree);
 
-  const menuContainer = document.getElementById("menu-container");
-  menuContainer.appendChild(createMenuNonRecursive(menuData));
+  
 </script>
 
 
