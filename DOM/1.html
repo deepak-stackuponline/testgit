@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fetch Image and Text from mocki.io</title>
+</head>
+<body>
+  <div id="content"></div>
+  <script>
+    const MOCKI_URL = 'https://mocki.io/v1/c002fd10-ed96-485a-9fb1-158bf70b2e6b';
+
+    fetch(MOCKI_URL)
+      .then(res => res.json())
+      .then(data => {
+        const contentDiv = document.getElementById('content');
+        const img = document.createElement('img');
+        img.src = data.img;
+        img.alt = "Fetched from mocki.io";
+        img.style.maxWidth = "300px";
+
+        const text = document.createElement('p');
+        text.textContent = data.content;
+
+        contentDiv.appendChild(img);
+        contentDiv.appendChild(text);
+      })
+      .catch(err => {
+        console.error('Error:', err);
+      });
+  </script>
+</body>
+</html>
