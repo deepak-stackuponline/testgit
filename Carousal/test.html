@@ -3,32 +3,81 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Document</title>
+  <title>Simple Carousel</title>
+  <style>
+    
+    .slide {
+      display: none;
+    }
+
+
+    .active {
+      display: block;
+    }
+
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+
+    img {
+      width: 500px;
+      height: 300px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Carousal</h1>
-  <div id="output"></div>
+
+  <h1>Simple Carousel</h1>
+
+  <div id="carousel"></div>
+
+  <button id="prevBtn">Previous</button>
+  <button id="nextBtn">Next</button>
 
   <script>
+    let currentSlide = 0; 
+    let slides = []; 
+
     fetch('https://run.mocky.io/v3/80d77c3e-1a91-4cf9-ad79-3f7fa162d598')
       .then(response => response.json())
       .then(data => {
-        const output = document.getElementById('output');
-        data.forEach(item => {
-          const container = document.createElement('div');
-          container.innerHTML = `
+        const carousel = document.getElementById('carousel');
+
+        
+        data.forEach((item, index) => {
+          const slide = document.createElement('div');
+          slide.classList.add('slide');
+          if (index === 0) slide.classList.add('active');
+
+          slide.innerHTML = `
             <h2>${item.text}</h2>
-            <img src="${item.image}" width="300" />
+            <img src="${item.image}" alt="Image" />
             <p><em>${item.caption}</em></p>
-            
           `;
-          output.appendChild(container);
+
+          carousel.appendChild(slide);
         });
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-        document.getElementById('output').innerHTML = '<p>Failed to load data.</p>';
+
+        
+        slides = document.querySelectorAll('.slide');
       });
+
+   
+    function showSlide(index) {
+      console.log("hey",slides);
+      if (slides.length === 0) return;
+      
+      slides[currentSlide].classList.remove('active'); 
+      currentSlide = (index + slides.length) % slides.length; 
+      slides[index].classList.add('active'); 
+    }
+
+    
+    document.getElementById('prevBtn').onclick = function(){ showSlide(currentSlide - 1)};
+    document.getElementById('nextBtn').onclick = function(){ showSlide(currentSlide + 1)};
   </script>
+
 </body>
 </html>
