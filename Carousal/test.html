@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Document</title>
+</head>
+<body>
+  <h1>Carousal</h1>
+  <div id="output"></div>
+
+  <script>
+    fetch('https://run.mocky.io/v3/80d77c3e-1a91-4cf9-ad79-3f7fa162d598')
+      .then(response => response.json())
+      .then(data => {
+        const output = document.getElementById('output');
+        data.forEach(item => {
+          const container = document.createElement('div');
+          container.innerHTML = `
+            <h2>${item.text}</h2>
+            <img src="${item.image}" width="300" />
+            <p><em>${item.caption}</em></p>
+            
+          `;
+          output.appendChild(container);
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+        document.getElementById('output').innerHTML = '<p>Failed to load data.</p>';
+      });
+  </script>
+</body>
+</html>
