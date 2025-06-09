@@ -9,7 +9,7 @@ interface Details {
 let userDetail: Details = {
     name: "John Doe",
     age: "30 Years",
-    active: true,
+    active: false,
     getName() {
         console.log(this.name);
     }
