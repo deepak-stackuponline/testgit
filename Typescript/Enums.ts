@@ -16,8 +16,8 @@ enum statusType{
     FAILED = "failed"
 }
 
-function getStatus(orderID:string, status:string){
+function getStatus1(orderID:string, status:string){
     console.log(orderID, status)
 }
 //It works on runtime
-getStatus("12345", statusType.PENDING);
+getStatus1("12345", statusType.PENDING);
