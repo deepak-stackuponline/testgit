@@ -31,7 +31,7 @@ console.log(getALLNames);
 let getPersonFromUSA = personArray.find((singlePerson, index)=>{
     return singlePerson.country === "USA";
 });
-//console.log(getPersonFromUSA);
+console.log(getPersonFromUSA);
 
 //Filter Array
 let getAllPersonFromUSA = personArray.filter((singlePerson,index)=>{

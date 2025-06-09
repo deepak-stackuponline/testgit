@@ -20,3 +20,7 @@ const adminDetailll: adminDet = {
 function getDetailsss<T>(details:T): T {
     return details;
 }
+
+//interface only takes objects
+//while type can take any data type
+
