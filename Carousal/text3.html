@@ -10,7 +10,8 @@
 <button id="prevBtn">Previous</button>
 <button id="nextBtn">Next</button>
 
-<div id="display"></div>
+<div id="display">
+</div>
 
 <script>
     let items = [];
@@ -20,10 +21,11 @@
       .then(response => response.json())
       .then(data => {
         items = data; // Assuming the JSON response is an array
+       
         initializeCarousel();
         displayItem(index);
       });
-
+    
     function initializeCarousel() {
       const displayDiv = document.getElementById("display");
 
@@ -43,6 +45,7 @@
       displayDiv.appendChild(textElement);
       displayDiv.appendChild(imgElement);
       displayDiv.appendChild(captionElement);
+      console.log(items);
     }
 
     function displayItem(i) {
@@ -50,6 +53,9 @@
         document.getElementById("texts").innerText = items[i].text;
         document.getElementById("img").src = items[i].image;
         document.getElementById("caption").innerText = items[i].caption;
+      }
+      else{
+        console.log("no data fetched");
       }
     }
 
