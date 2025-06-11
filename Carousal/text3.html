@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image Viewer</title>
+</head>
+<body>
+
+<h2>Carousel</h2>
+
+<button id="prevBtn">Previous</button>
+<button id="nextBtn">Next</button>
+
+<div id="display"></div>
+
+<script>
+    let items = [];
+    let index = 0;
+
+    fetch('https://run.mocky.io/v3/76cf9056-b111-4172-8c99-59031cc6d4e6')
+      .then(response => response.json())
+      .then(data => {
+        items = data; // Assuming the JSON response is an array
+        initializeCarousel();
+        displayItem(index);
+      });
+
+    function initializeCarousel() {
+      const displayDiv = document.getElementById("display");
+
+      // Create elements dynamically
+      const textElement = document.createElement("p");
+      textElement.id = "texts";
+
+      const imgElement = document.createElement("img");
+      imgElement.id = "img";
+      imgElement.width = 250;
+      imgElement.height = 150;
+
+      const captionElement = document.createElement("p");
+      captionElement.id = "caption";
+
+      // Append elements to display div
+      displayDiv.appendChild(textElement);
+      displayDiv.appendChild(imgElement);
+      displayDiv.appendChild(captionElement);
+    }
+
+    function displayItem(i) {
+      if (items.length > 0) {
+        document.getElementById("texts").innerText = items[i].text;
+        document.getElementById("img").src = items[i].image;
+        document.getElementById("caption").innerText = items[i].caption;
+      }
+    }
+
+    function showNext() {
+      index++;
+      if (index >= items.length) { 
+        index = 0;
+      }
+      displayItem(index);
+    }
+
+    function showPrevious() {
+      index--;
+      if (index < 0) {
+        index = items.length - 1; 
+      }
+      displayItem(index);
+    }
+
+    // Attach event listeners to buttons
+    document.getElementById("prevBtn").addEventListener("click", showPrevious);
+    document.getElementById("nextBtn").addEventListener("click", showNext);
+
+</script>
+
+</body>
+</html>
