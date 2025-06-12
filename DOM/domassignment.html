@@ -25,18 +25,59 @@
   // JSON defining the menu structure
   const menuData = {
     title: "Main Menu",
-    submenus: [
-      { title: "Submenu 1" },
+    child: [
+      {
+        title: "Submenu 1",
+        child: []
+      },
       {
         title: "Submenu 2",
-        submenus: [
-          { title: "Submenu 21" },
-          { title: "Submenu 22" }
+        child: []
+      },
+      {
+        title: "Submenu 3",
+        child: [
+          {
+            title: "Submenu 31",
+            child: [{
+                title: "Submenu 311",
+                child: []
+              },]
+          },
+          {
+            title: "Submenu 32",
+            child: []
+          }
+        ]
+      },
+      {
+        title: "Submenu 3",
+        child: [
+          {
+            title: "Submenu 31",
+            child: [{
+                title: "Submenu 311",
+                child: [
+                  {
+                    title: "Submenu 3111",
+                    child: []
+                  },
+                  {
+                    title: "Submenu 3112",
+                    child: []
+                  }
+                ]
+              },]
+          },
+          {
+            title: "Submenu 32",
+            child: []
+          }
         ]
       }
     ]
   };
-
+  
   // Recursive function to create menu
   function createMenu(data) {
     const container = document.createElement("div");
@@ -50,28 +91,16 @@
     }
     
     // Create submenu list if submenus exist
-    if (data.submenus && data.submenus.length > 0) {
+    if (data.child && data.child.length > 0) {
       const ul = document.createElement("ul");
       
-      data.submenus.forEach(item => {
+      data.child.forEach(item => {
         const li = document.createElement("li");
         li.textContent = item.title;
 
-        if (item.submenus && item.submenus.length > 0) {
-          // Only create submenu structure, not the full menu with title
-          const subUl = document.createElement("ul");
-          item.submenus.forEach(subItem => {
-            const subLi = document.createElement("li");
-            subLi.textContent = subItem.title;
-            
-            if (subItem.submenus && subItem.submenus.length > 0) {
-              const childMenu = createMenu(subItem);
-              subLi.appendChild(childMenu);
-            }
-            
-            subUl.appendChild(subLi);
-          });
-          li.appendChild(subUl);
+        if (item.child && item.child.length > 0) {
+          const childMenu = createMenu(item);
+          li.appendChild(childMenu);
         }
 
         ul.appendChild(li);
