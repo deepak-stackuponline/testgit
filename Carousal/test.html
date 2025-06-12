@@ -5,22 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Simple Carousel</title>
   <style>
-    
     .slide {
       display: none;
     }
-
-
     .active {
       display: block;
     }
-
     button {
       margin: 10px;
       padding: 10px 20px;
       font-size: 16px;
     }
-
     img {
       width: 500px;
       height: 300px;
@@ -37,46 +32,61 @@
   <button id="nextBtn">Next</button>
 
   <script>
-    let currentSlide = 0; 
-    let slides = []; 
+    // Keep track of the current slide index
+    let currentSlide = 0;
+    // This will hold all the slide elements
+    let slides = [];
 
+    // Fetch carousel data from the API
     fetch('https://run.mocky.io/v3/80d77c3e-1a91-4cf9-ad79-3f7fa162d598')
-      .then(response => response.json())
+      .then(response => response.json()) // Convert the response to JSON
       .then(data => {
         const carousel = document.getElementById('carousel');
 
-        
+        // For each item in the data, create a slide
         data.forEach((item, index) => {
           const slide = document.createElement('div');
           slide.classList.add('slide');
+          // Make the first slide visible
           if (index === 0) slide.classList.add('active');
 
+          // Add content to the slide
           slide.innerHTML = `
             <h2>${item.text}</h2>
             <img src="${item.image}" alt="Image" />
             <p><em>${item.caption}</em></p>
           `;
 
+          // Add the slide to the carousel
           carousel.appendChild(slide);
         });
 
-        
+        // Get all slides and store them in the slides array
         slides = document.querySelectorAll('.slide');
       });
 
-   
+    // Function to show a slide by index
     function showSlide(index) {
-      console.log("hey",slides);
+      // If there are no slides, do nothing
       if (slides.length === 0) return;
-      
-      slides[currentSlide].classList.remove('active'); 
-      currentSlide = (index + slides.length) % slides.length; 
-      slides[index].classList.add('active'); 
+
+      // Hide the current slide
+      slides[currentSlide].classList.remove('active');
+      // Calculate the new slide index (wraps around)
+      currentSlide = (index + slides.length) % slides.length;
+      // Show the new slide
+      slides[currentSlide].classList.add('active');
     }
 
-    
-    document.getElementById('prevBtn').onclick = function(){ showSlide(currentSlide - 1)};
-    document.getElementById('nextBtn').onclick = function(){ showSlide(currentSlide + 1)};
+    // When the Previous button is clicked, show the previous slide
+    document.getElementById('prevBtn').onclick = function() {
+      showSlide(currentSlide - 1);
+    };
+
+    // When the Next button is clicked, show the next slide
+    document.getElementById('nextBtn').onclick = function() {
+      showSlide(currentSlide + 1);
+    };
   </script>
 
 </body>
