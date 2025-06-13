@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Nested Menu</title>
+  <style>
+    ul {
+      list-style-type: none;
+      padding-left: 20px;
+    }
+    li {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Nested Menu Example</h2>
+<div id="menuContainer"></div>
+
+<script>
+  const mainmenu = [
+    {
+      menuname: 'menu',
+      child: [
+        {
+          menuname: 'submenu1',
+          child: [
+            { menuname: 'submenu11', child: [] },
+            { menuname: 'submenu12', child: [] }
+          ]
+        },
+        {
+          menuname: 'submenu2',
+          child: [
+            { menuname: 'submenu21', child: [] },
+            { menuname: 'submenu22', child: [] }
+          ]
+        },
+        {
+          menuname: 'submenu3',
+          child: []
+        }
+      ]
+    },
+    {
+      menuname: 'dashboard',
+      child: []
+    }
+  ];
+
+  function createMenu(menuList) {
+    let ul = document.createElement("ul");
+
+    menuList.forEach(item => {
+      let li = document.createElement("li");
+      li.textContent = item.menuname;
+
+      if (item.child && item.child.length > 0) {
+        li.appendChild(createMenu(item.child));
+      }
+
+      ul.appendChild(li);
+    });
+
+    return ul;
+  }
+
+  document.getElementById("menuContainer").appendChild(createMenu(mainmenu));
+</script>
+
+</body>
+</html>

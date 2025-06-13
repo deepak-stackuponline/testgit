@@ -48,33 +48,28 @@
       };
 
 
-      function createMenu(menu){
-        console.log(menu);
+
+      function createMenu(menu) {
+        const ul = document.createElement('ul');
+        // Always add the current menu name as the first li
+        const li = document.createElement('li');
+        li.textContent = menu.menuName;
+        ul.appendChild(li);
+
+        // If there are children, map over them and append their menus
+        if (menu.child && menu.child.length > 0) {
+          menu.child.map(
+            function(childMenu)  
+            {
+            const childUl = createMenu(childMenu);
+            li.appendChild(childUl);
+          });
+        }
+        return ul;
       }
-    
-    createMenu(menuObject);
 
-    //   function createMenu(menu) {
-    //     const ul = document.createElement('ul');
-    //     // Always add the current menu name as the first li
-    //     const li = document.createElement('li');
-    //     li.textContent = menu.menuName;
-    //     ul.appendChild(li);
-
-    //     // If there are children, map over them and append their menus
-    //     if (menu.child && menu.child.length > 0) {
-    //       menu.child.map(
-    //         function(childMenu)  
-    //         {
-    //         const childUl = createMenu(childMenu);
-    //         li.appendChild(childUl);
-    //       });
-    //     }
-    //     return ul;
-    //   }
-
-    //   const menuTree = createMenu(menuObject);
-    //   document.getElementById('menu-container').appendChild(menuTree);
+      const menuTree = createMenu(menuObject);
+      document.getElementById('menu-container').appendChild(menuTree);
     </script>
 </body>
 </html>
