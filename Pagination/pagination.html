@@ -9,13 +9,13 @@
 </head>
 <body>
   <div class="container mt-5">
-    <h2 class="mb-4">User List with Pagination</h2>
+    <h2 class="mb-4">Pagination</h2>
     <!-- Dropdown to select how many rows to show per page -->
     <div class="mb-3">
       <label for="rowsPerPage" class="form-label">Rows per page:</label>
       <select id="rowsPerPage" class="form-select" style="width: auto; display: inline-block;">
-        <option value="5">5</option>
-        <option value="10" selected>10</option>
+        <option value="5" selected>5</option>
+        <option value="10">10</option>
         <option value="20">20</option>
         <option value="50">50</option>
       </select>
@@ -24,7 +24,7 @@
     <table class="table table-bordered">
       <thead>
         <tr>
-          <th>#</th>
+          <th>SL No</th>
           <th>First Name</th>
           <th>Last Name</th>
           <th>Email</th>
@@ -45,17 +45,17 @@
   <script>
     // 1. Create an array of 100 users with dummy data
     const users = [];
-    for (let i = 1; i <= 100; i++) {
+    for (let i = 1; i <= 103; i++) {
       users.push({
-        firstName: `First${i}`,
-        lastName: `Last${i}`,
-        email: `user${i}@example.com`,
+        firstName: `First Name${i}`,
+        lastName: `Last Name${i}`,
+        email: `mail${i}@example.com`,
         phone: `123-456-78${String(i).padStart(2, '0')}`
       });
     }
 
     // 2. Set up pagination variables
-    let rowsPerPage = 10; // Default rows per page
+    let rowsPerPage = 5; // Default rows per page
     let currentPage = 1;  // Start on the first page
     let totalPages = Math.ceil(users.length / rowsPerPage);
 

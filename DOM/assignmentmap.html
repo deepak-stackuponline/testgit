@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu with map()</title>
+    <style>
+      ul {
+        list-style-type: none;
+        padding-left: 20px;
+      }
+      li {
+        margin: 5px 0;
+      }
+    </style>
+</head>
+<body>
+    <div id="menu-container"></div>
+    <script>
+      const menuObject = {
+        menuName: "Main Menu",
+        child: [
+          {
+            menuName: "Submenu 1",
+            child: []
+          },
+          {
+            menuName: "Submenu 2",
+            child: []
+          },
+          {
+            menuName: "Submenu 3",
+            child: [
+              {
+                menuName: "Submenu 31",
+                child: [{
+                    menuName: "Submenu 311",
+                    child: []
+                  }]
+              },
+              {
+                menuName: "Submenu 32",
+                child: []
+              }
+            ]
+          }
+        ]
+      };
+
+
+      function createMenu(menu){
+        console.log(menu);
+      }
+    
+    createMenu(menuObject);
+
+    //   function createMenu(menu) {
+    //     const ul = document.createElement('ul');
+    //     // Always add the current menu name as the first li
+    //     const li = document.createElement('li');
+    //     li.textContent = menu.menuName;
+    //     ul.appendChild(li);
+
+    //     // If there are children, map over them and append their menus
+    //     if (menu.child && menu.child.length > 0) {
+    //       menu.child.map(
+    //         function(childMenu)  
+    //         {
+    //         const childUl = createMenu(childMenu);
+    //         li.appendChild(childUl);
+    //       });
+    //     }
+    //     return ul;
+    //   }
+
+    //   const menuTree = createMenu(menuObject);
+    //   document.getElementById('menu-container').appendChild(menuTree);
+    </script>
+</body>
+</html>
