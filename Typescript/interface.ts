@@ -1,4 +1,6 @@
 //Interface
+//Interface is a way to define the structure of an object in TypeScript.
+
 interface Details {
     name: string;
     age: number | String; 

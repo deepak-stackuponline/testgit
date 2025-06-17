@@ -3,37 +3,48 @@ interface User {
   Sl: number;
   firstName: string;
   email: string;
-  phone: string;
+  phone: number;
 }
+
+//scss
+//sass
+
+
 
 const pageItems = 5;
 let currentPage = 1;
 let items: User[] = [];
 
-const tableList = document.getElementById('userTable') as HTMLTableSectionElement;
-const prevBtn = document.getElementById('previousButton') as HTMLButtonElement;
-const nextBtn = document.getElementById('nextButton') as HTMLButtonElement;
+const tableList = document.getElementById('userTable') as HTMLElement;
+const prevBtn = document.getElementById('previousButton') as HTMLElement;
+const nextBtn = document.getElementById('nextButton') as HTMLElement;
 
-const spinnerDiv = document.getElementById('spinner') as HTMLDivElement;
-const contentDiv = document.getElementById('content') as HTMLDivElement;
+// const spinnerDiv = document.getElementById('spinner') as HTMLElement;
+// const contentDiv = document.getElementById('content') as HTMLElement;
 
-async function fetchData(): Promise<void> {
+async function fetchData():Promise<void> {
   try {
     const response = await fetch("https://mocki.io/v1/465348e0-a44b-44ca-9efc-17b215f898cd");
     const data: User[] = await response.json();
     items = data;
+   
+    // spinnerDiv.style.display = 'none';
+    // contentDiv.style.display = 'block';
+  (document.getElementById('spinner') as HTMLElement).style.display = 'none';
+  (document.getElementById('content') as HTMLElement).style.display = 'block';
 
-    spinnerDiv.style.display = 'none';
-    contentDiv.style.display = 'block';
+  // document.getElementById('spinner').style.display = 'none';  
+  // document.getElementById('content').style.display = 'block';
 
     tableView();
   } catch (error) {
     console.error("Error fetching data:", error);
-    spinnerDiv.innerHTML = '<div class="alert alert-danger">Failed to load data</div>';
+    (document.getElementById('spinner') as HTMLElement).innerHTML = '<div class="alert alert-danger">Failed to load data</div>';
+    // document.getElementById('spinner').innerHTML = '<div class="alert alert-danger">Failed to load data</div>';
   }
 }
 
-function tableView(): void {
+function tableView():void {
   tableList.innerHTML = '';
 
   const start = (currentPage - 1) * pageItems;
@@ -52,32 +63,35 @@ function tableView(): void {
   }
 }
 
-function showSpinner(): void {
-  spinnerDiv.style.display = 'block';
-  contentDiv.style.display = 'none';
+function showSpinner():void {
+
+  (document.getElementById('spinner') as HTMLElement).style.display = 'block';
+  (document.getElementById('content') as HTMLElement).style.display = 'none';
+
+
+  // spinnerDiv.style.display = 'block';
+  // contentDiv.style.display = 'none';
+
+
+    // document.getElementById('spinner').style.display = 'none';
+    // document.getElementById('content').style.display = 'block';
 }
 
-prevBtn.addEventListener('click', () => {
+prevBtn.addEventListener('click', function ()  {
   if (currentPage > 1) {
     currentPage--;
     showSpinner();
-    setTimeout(() => {
-      spinnerDiv.style.display = 'none';
-      contentDiv.style.display = 'block';
-      tableView();
-    }, 500);
+    fetchData();
+    tableView();
   }
 });
 
-nextBtn.addEventListener('click', () => {
+nextBtn.addEventListener('click', function () {
   if (currentPage < Math.ceil(items.length / pageItems)) {
     currentPage++;
     showSpinner();
-    setTimeout(() => {
-      spinnerDiv.style.display = 'none';
-      contentDiv.style.display = 'block';
-      tableView();
-    }, 500);
+    fetchData();
+    tableView();
   }
 });
 
