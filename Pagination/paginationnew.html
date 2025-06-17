@@ -37,13 +37,18 @@
 
 <script>
 
-  fetch("https://mocki.io/v1/7209d2cc-b041-48e7-af12-447195e46be0")
-    .then(response => response.json())
-    .then(function(data) {
-      items = data;
-      tableView();
-    });
+async function fetchData() {
+  try {
+    const response = await fetch("https://mocki.io/v1/7209d2cc-b041-48e7-af12-447195e46be0");
+    const data = await response.json();
+    items = data;
+    tableView();
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+}
 
+fetchData();
 
   const pageItems = 5;
   let currentPage = 1;
@@ -88,6 +93,8 @@
       tableView();
     }
   });
+
+  
 </script>
 </body>
 </html>
